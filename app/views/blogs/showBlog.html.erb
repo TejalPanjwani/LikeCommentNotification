@@ -1,0 +1,105 @@
+
+<div style="width:550px;margin-top:50px;margin-left:200px;">
+
+<div class="panel panel-default">
+<div class="panel-body">
+
+
+<p>
+<%= @blog.user_name(@blog.user_id) %>
+<br>
+<%= time_ago_in_words(@blog.updated_at.to_date) %> ago
+</p>
+<hr>
+
+
+<p>
+<strong> Title </strong>
+<%= @blog.title %>
+</p>
+
+
+<p>
+<strong> Description: </strong>
+<br>
+<%= @blog.description %>
+</p>
+<br>
+<br>
+
+<p>
+<% if @blog.comments != []  %>
+
+    <h4> <b>Comments</b> </h4>
+
+    <% @blog.comments.each do |coment|   %>
+
+        <strong>Name:</strong><%= @blog.user_name(coment.user_id) %><br>
+        <%= coment.body  %>
+        <br>
+        <br>
+
+    <% end %>
+
+<% else %>
+
+  <h3>not add yet any comment</h3>
+<br>
+
+<% end %>
+<hr>
+<%=Like.mycount(@blog.id)%> Like  <%=Comment.mycount(@blog.id)%> Comments
+<hr>
+
+
+<button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn btn-default" >
+Comment </button>
+
+<% if @blog.check_user_like_or_not(current_user.id,@blog.id) %>
+ 
+  <%= link_to "like", blog_destroyLike_path(@blog.id),  :class=>"btn btn-success" ,method: :delete %> 
+
+
+<% else %>
+ <%= link_to "Like", blog_addLike_path(@blog.id),:class=>"btn btn-default", method: :post %> 
+
+<% end %>
+
+
+</p>
+
+<br>
+
+</div>
+</div>
+
+
+<div  id="modal-wrapper", class="modal">
+
+<!-- Modal content-->
+<div class="modal-content">
+  <div class="modal-header" style="padding:35px 50px;">
+    <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="close popup" >&times;</span>
+    <h4><span class="glyphicon glyphicon-comment"></span> Comment</h4>
+  </div>
+
+  <div class="modal-body" style="padding:40px 50px;">
+  
+    <%= form_with scope: :comments, url: blog_comments_path ,local: true do |f| %>
+      <div class="form-group">
+        <%= f.text_area :body , placeholder:"Write comment...."%>
+      </div>
+      <div class="form-group">
+        <%= f.submit %>
+      </div>
+      
+    <% end %>
+  </div>
+ 
+</div>
+
+</div>
+
+</div> 
+
+

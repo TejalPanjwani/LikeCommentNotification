@@ -1,0 +1,24 @@
+
+<div style="width:200px;margin-top:20px;margin-left:20px;">
+
+<h1>New Blog</h1>
+<%= form_with scope: :blogs, url: blogs_path ,local: true do |form| %>
+  
+   
+  
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+    </p>
+   
+    <p>
+      <%= form.label :description %><br>
+      <%= form.text_area :description %>
+    </p>
+   
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+
+</div>

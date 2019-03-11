@@ -1,0 +1,84 @@
+
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">WebSiteName</a>
+  </div>
+
+  <ul class="nav navbar-nav"> 
+
+  </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <% if current_user %>  
+     
+
+        <%= link_to(root_path, class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-eye-open"></span> See Blogs
+        <% end %>
+
+
+        <%= link_to(addBlog_path, class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-plus-sign"></span> Add Blogs
+        <% end %>
+
+
+        <%= link_to(myBlog_path, class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-book"></span> Your Blogs
+        <% end %>
+
+
+        <%= link_to(seeNotification_path, class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-bell"></span> Notification
+            <span class="badge badge-success"></span><%=  Notify.mycount(current_user.id) %></span>
+            
+        <% end %>
+       
+
+        <%= link_to(seeNotification_path, class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-user"></span> <%= current_user.fullname %>
+        <% end %>
+
+
+        <%= link_to(destroy_user_session_path, method: :delete , class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-off"></span> Logout
+        <% end %>
+    
+ 
+    <% else %>  
+
+        
+        <%= link_to(root_path, class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-eye-open"></span> Blogs
+        <% end %>
+
+        
+        <%= link_to(new_user_registration_path, class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-user"></span> Register
+        <% end %>
+
+
+        <%= link_to( new_user_session_path  , class: 'dropdown-item') do %>
+            <span class="glyphicon glyphicon-user"></span>  Login
+        <% end %>
+
+
+    <% end %>  
+</ul>
+</div>
+
+</nav> 
+</body>

@@ -1,0 +1,39 @@
+<div style="width:500px;margin-top:20px;margin-left:20px;">
+<% if @notices != [] %>
+    <%   @notices.each do |notice|  %>
+
+        <%# if current_user.id == notice.user_id %>
+        <%# %>
+            <%  if notice.unread?   %>
+                <div  style="background-color:lightblue">
+                
+                    
+                    <%= " #{notice.name_of_user(notice.notifyable_id,notice.notifyable_type)} is   #{notice.notifyable_type} on your #{notice.notify_to_user(notice.user_id).title} blog " %>
+                    <%= link_to "show", blog_comment_showNotify_path(notice.notify_to_user(notice.user_id).id,notice.id) %>
+                    <br>
+                </div>   
+            <% elsif notice.read? %>
+
+            
+                <%= "#{notice.name_of_user(notice.notifyable_id,notice.notifyable_type)} is #{notice.notifyable_type} on your #{notice.notify_to_user(notice.user_id).title} blog" %>
+
+                <%#= link_to "show", blog_comment_showNotify_path(notice.notify_to_user(notice.user_id).id,notice.notifyable_id) %>
+                <%# %>
+               <br>
+            <% end %>
+        <%# else %>
+
+
+        <%# end %>
+    <% end %>
+    
+<br>
+<% else %>
+<h3> no notification </h3>
+
+<% end %>
+
+</div>
+
+<%# if current_user.id == notice.user_id %>
+<%# this means show only current user's notification to current_user from Notify table   %>

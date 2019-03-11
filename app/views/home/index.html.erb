@@ -1,0 +1,37 @@
+
+<div style="width:200px;margin-top:30px;margin-left:30px;">
+
+<% if @blogs != [] %>
+
+        <% @blogs.each do |b| %>
+            <div class="card" style="width: 25rem;">
+            <div class="card-body">
+            <div class="container">
+            <h5 class="card-title"><b> Title: </b><%= b.title%></h5>
+                <h5 class="card-title"> <b> Description: </b> <%= truncate(b.description,length: 15)%></h5>
+
+               
+                <h5 class="card-title"> <b> Post by: </b> <%= User.find(b.user_id).fullname %></h5>
+    
+                <% if current_user %>
+                        <%= link_to 'view more', showBlog_path(b.id), :class=>"card-link" %>
+                <% else %>
+                        <%= link_to 'view more', new_user_session_path , :class=>"card-link"%>
+                <% end %> 
+                <br><br>
+    
+            </div>
+            </div>
+            </div>
+            <br><br>
+        <% end %>
+
+<% else %>
+  <%= "not add yet" %>
+
+<% end %>
+
+</div>
+
+
+

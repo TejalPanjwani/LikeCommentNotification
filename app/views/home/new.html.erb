@@ -1,0 +1,34 @@
+
+<div style="width:200px;margin-top:20px;margin-left:20px;">
+
+<% if @blogs != [] %>
+
+        <% @blogs.each do |b| %>
+
+                <strong> Title: <strong>
+                <%= b.title%>
+                <br>
+                <strong> description: <strong>
+                <%= truncate(b.description,length: 15)%>
+                <br>
+                <strong> Post by: <strong>
+        
+                <%= User.find(b.user_id).fullname %>
+                <br>
+
+                <% if current_user %>
+                        <%= link_to 'view more', showBlog_path(b.id) %>
+                <% else %>
+                        <%= link_to 'view more', new_user_session_path %>
+                <% end %>
+
+                <br><br>
+    
+        <% end %>
+
+<% else %>
+  <%= "not add yet" %>
+
+<% end %>
+
+</div>

@@ -1,0 +1,22 @@
+
+<div style="width:200px;margin-top:20px;margin-left:20px;">
+<% if @myBlogs != []%>
+    <%  @myBlogs.each do |blog| %>
+
+        <strong> Title: <strong>
+        <%= blog.title%><br>
+
+        <strong> description: <strong>
+        <%= truncate(blog.description,length: 10)%><br><br>
+
+        <%= link_to "show", blog_path(blog) %>
+        <br>
+        <br>
+
+
+    <% end %>
+<% else %>
+
+<h3>no add yet</h3>
+<% end %>
+</div>

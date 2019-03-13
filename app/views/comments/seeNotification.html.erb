@@ -7,17 +7,20 @@
             <%  if notice.unread?   %>
                 <div  style="background-color:lightblue">
                 
-                    
-                    <%= " #{notice.name_of_user(notice.notifyable_id,notice.notifyable_type)} is   #{notice.notifyable_type} on your #{notice.notify_to_user(notice.user_id).title} blog " %>
-                    <%= link_to "show", blog_comment_showNotify_path(notice.notify_to_user(notice.user_id).id,notice.id) %>
+                    <%= " #{notice.name_of_user(notice.notifyable_id)} is   #{notice.notifyable_type} on your #{notice.notify_to_user(notice.notifyable_id)} blog " %>
+    
+                    <%= link_to "show", blog_comment_showNotify_path(notice.take_user_id(notice.user_id,notice.notifyable_id),notice.id) %>
                     <br>
                 </div>   
+
             <% elsif notice.read? %>
 
-            
-                <%= "#{notice.name_of_user(notice.notifyable_id,notice.notifyable_type)} is #{notice.notifyable_type} on your #{notice.notify_to_user(notice.user_id).title} blog" %>
+                <% binding.pry %>
 
-                <%#= link_to "show", blog_comment_showNotify_path(notice.notify_to_user(notice.user_id).id,notice.notifyable_id) %>
+            
+                <%= "#{notice.name_of_user(notice.notifyable_id)} is #{notice.notifyable_type} on your #{notice.notify_to_user(notice.notifyable_id)} blog" %>
+
+                <%#= link_to "show", blog_comment_showNotify_path(notice.take_user_id(notice.user_id,notice.notifyable_id),notice.notifyable_id) %>
                 <%# %>
                <br>
             <% end %>

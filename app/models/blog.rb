@@ -16,6 +16,7 @@ class Blog < ApplicationRecord
 
   def check_user_like_or_not(user_id,blog)
     if Like.exists?(:user_id=>user_id) 
+
       if blog == Like.find_by("user_id=?",user_id).blog_id
         true
       else 

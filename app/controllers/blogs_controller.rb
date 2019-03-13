@@ -76,12 +76,14 @@ class BlogsController < ApplicationController
             @user = User.find(Blog.find(params[:blog_id]).user_id)
             if @user.id != current_user.id
                 @notice = Notify.new(notifyable: @like)
+                    
                 @notice.ensure_user_and_notyfication(@user.id)
                 if @notice.save
                     flash[:success] = "You like this post"
                     redirect_to showBlog_path(params[:blog_id])
                 end
             else
+                flash[:success] = "You like this post"
                 redirect_to showBlog_path(@like.blog_id)
             end
 
@@ -94,10 +96,16 @@ class BlogsController < ApplicationController
     def destroyLike
         @like = Like.find_by("blog_id=?",params[:blog_id])
         @notice = Notify.find_by("notifyable_id=?",@like.id)
-    
-        @notice.destroy
         
-        @like.destroy
+        if @notice
+            @notice = Notify.find_by("notifyable_id=?",@like.id)
+            @notice.destroy
+        
+            @like.destroy
+        else
+        
+            @like.destroy
+        end
 
         flash[:danger] = "You dislike this post"
 

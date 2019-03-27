@@ -1,15 +1,14 @@
-
 <div style="width:400px;margin-top:20px;margin-left:20px;">
 
 <p>
-<strong> Title </strong>
-<%= @blog.title %>
+    <strong> Title </strong>
+    <%= @blog.title %>
 </p>
 
 
 <p>
-<strong> Description </strong>
-<%= @blog.description %>
+    <strong> Description </strong>
+    <%= @blog.description %>
 </p>
 
 <%= link_to "Edit Blog" ,edit_blog_path,  :class=>"btn btn-primary" %>
@@ -20,59 +19,45 @@ Comments and Likes </button>
 
 
 
-
-
-
-
-
 <div  id="modal-wrapper", class="modal">
 
-<!-- Modal content-->
-<div class="modal-content">
-  <div class="modal-header" style="padding:35px 50px;">
-    <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="close popup" >&times;</span>
-    <h4><span class="glyphicon glyphicon-comment"></span> Comments and Likes</h4> 
-  </div>
+    <!-- Modal content-->
+    <div class="modal-content">
+    <div class="modal-header" style="padding:35px 50px;">
+        <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="close popup" >&times;</span>
+        <h4><span class="glyphicon glyphicon-comment"></span> Comments and Likes</h4> 
+    </div>
   
-  <div class="modal-body" style="padding:40px 50px;">
-  <h4>Total: <%=Comment.mycount(@blog.id)%> Comments</h4>
-    <p>
-    <% if @blog.comments != []  %>
+    <div class="modal-body" style="padding:40px 50px;">
+    <h4>Total: <%=Comment.mycount(@blog.id)%> Comments</h4>
+        <p>
+        <% if @blog.comments != []  %>
+            <% @blog.comments.each do |coment|   %>
+                <div class="form-group">
+                    <strong>Name:</strong><%= @blog.user_name(coment.user_id) %><br>
+                    <%= coment.body  %>
+                </div>
+            <% end %>
+        <% else %>
+            <h3>not add yet any comment</h3>
+        <% end %>
+        <br>
+        <hr>
 
-        <% @blog.comments.each do |coment|   %>
-            <div class="form-group">
-                <strong>Name:</strong><%= @blog.user_name(coment.user_id) %><br>
-                <%= coment.body  %>
-            </div>
+        <h4>Total: <%=Like.mycount(@blog.id)%> Likes</h4>
+
+        <p>
+        <% if @blog.likes != []  %>
+            <% @blog.likes.each do |coment|   %>
+                <div class="form-group">
+                    <strong>Name:</strong><%= @blog.user_name(coment.user_id) %><br>
+                </div>
+            <% end %>
+        <% else %>
+            <h3>not add yet any like</h3>        
         <% end %>
 
-    <% else %>
-
-        <h3>not add yet any comment</h3>
-
-    <% end %>
-    <br>
-    <hr>
-
-    <h4>Total: <%=Like.mycount(@blog.id)%> Likes</h4>
-
-    <p>
-    <% if @blog.likes != []  %>
-
-        <% @blog.likes.each do |coment|   %>
-            <div class="form-group">
-                <strong>Name:</strong><%= @blog.user_name(coment.user_id) %><br>
-            </div>
-        <% end %>
-
-    <% else %>
-
-        <h3>not add yet any like</h3>
-        
-    <% end %>
-  
-  
-  </div>
+    </div>
 </div>
 
 

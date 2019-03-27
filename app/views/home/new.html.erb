@@ -1,10 +1,7 @@
-
 <div style="width:200px;margin-top:20px;margin-left:20px;">
 
 <% if @blogs != [] %>
-
         <% @blogs.each do |b| %>
-
                 <strong> Title: <strong>
                 <%= b.title%>
                 <br>
@@ -12,7 +9,6 @@
                 <%= truncate(b.description,length: 15)%>
                 <br>
                 <strong> Post by: <strong>
-        
                 <%= User.find(b.user_id).fullname %>
                 <br>
 
@@ -23,12 +19,9 @@
                 <% end %>
 
                 <br><br>
-    
         <% end %>
-
 <% else %>
   <%= "not add yet" %>
-
 <% end %>
 
 </div>

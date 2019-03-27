@@ -10,7 +10,6 @@ class Notify < ApplicationRecord
     self.user_id = user
   end
 
-
   def notify_to_user(id)
     #take blog title
     if Notify.find_by("notifyable_id=?",id).notifyable_type == "Comment"
@@ -27,7 +26,6 @@ class Notify < ApplicationRecord
     else 
       Like.find(notifyable_id).blog_id
     end
-
   end
 
   def  name_of_user(id) 
@@ -37,12 +35,10 @@ class Notify < ApplicationRecord
     else 
       User.find(Like.find(id).user_id).fullname
     end
-
   end
 
   def self.mycount(id)
     Notify.where("user_id=?",id).where("statustype=?",0).count
-
   end
   
 end

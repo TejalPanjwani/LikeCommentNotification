@@ -1,39 +1,30 @@
 <div style="width:500px;margin-top:20px;margin-left:20px;">
 <% if @notices != [] %>
     <%   @notices.each do |notice|  %>
-
         <%# if current_user.id == notice.user_id %>
         <%# %>
             <%  if notice.unread?   %>
                 <div  style="background-color:lightblue">
-                
                     <%= " #{notice.name_of_user(notice.notifyable_id)} is   #{notice.notifyable_type} on your #{notice.notify_to_user(notice.notifyable_id)} blog " %>
-    
                     <%= link_to "show", blog_comment_showNotify_path(notice.take_user_id(notice.user_id,notice.notifyable_id),notice.id) %>
                     <br>
                 </div>   
 
             <% elsif notice.read? %>
-
-                <% binding.pry %>
-
             
                 <%= "#{notice.name_of_user(notice.notifyable_id)} is #{notice.notifyable_type} on your #{notice.notify_to_user(notice.notifyable_id)} blog" %>
-
                 <%#= link_to "show", blog_comment_showNotify_path(notice.take_user_id(notice.user_id,notice.notifyable_id),notice.notifyable_id) %>
                 <%# %>
                <br>
             <% end %>
+
         <%# else %>
-
-
         <%# end %>
     <% end %>
+    <br>
     
-<br>
 <% else %>
-<h3> no notification </h3>
-
+    <h3> no notification </h3>
 <% end %>
 
 </div>

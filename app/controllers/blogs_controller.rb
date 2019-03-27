@@ -68,7 +68,6 @@ class BlogsController < ApplicationController
         @comments = Comment.where("blog_id=?",params[:blog_id] )
     end
 
-
     def addLike
         @like = Like.new(:user=>current_user.id, :blog=>params[:blog_id])
         if @like.save
@@ -86,8 +85,6 @@ class BlogsController < ApplicationController
                 flash[:success] = "You like this post"
                 redirect_to showBlog_path(@like.blog_id)
             end
-
-           
         else 
             redirect_to showBlog_path(params[:blog_id])
         end
@@ -96,19 +93,15 @@ class BlogsController < ApplicationController
     def destroyLike
         @like = Like.find_by("blog_id=?",params[:blog_id])
         @notice = Notify.find_by("notifyable_id=?",@like.id)
-        
         if @notice
             @notice = Notify.find_by("notifyable_id=?",@like.id)
             @notice.destroy
         
             @like.destroy
         else
-        
             @like.destroy
         end
-
         flash[:danger] = "You dislike this post"
-
         redirect_to showBlog_path(params[:blog_id])
     end
 
@@ -116,7 +109,6 @@ class BlogsController < ApplicationController
     def blog_params
         params.require(:blogs).permit(:title,:description)
     end
-
 
     def blog_update_params
         params.require(:blog).permit(:title,:description)

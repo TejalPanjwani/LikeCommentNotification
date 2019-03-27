@@ -23,23 +23,18 @@ class CommentsController < ApplicationController
             #render 'blog/showBlog'
             redirect_to showBlog_path(params[:blog_id])
         end
-      
     end
 
-    
     def seeNotification
         #show all notification
         #read and unread notification
         @notices = Notify.where("user_id=?",current_user.id)
-
     end
-
 
     def showNotify
         @blog = Blog.find(params[:blog_id])
         @notifies = Notify.find(params[:comment_id])
 
-        
         if @notifies.notifyable_type == "Comment"
             @comment = Comment.find(@notifies.notifyable_id)
             @notify = Notify.find(params[:comment_id])
@@ -51,8 +46,6 @@ class CommentsController < ApplicationController
             @notify.statustype = "read"
             @notify.save
         end
-       
-
     end
 
     private

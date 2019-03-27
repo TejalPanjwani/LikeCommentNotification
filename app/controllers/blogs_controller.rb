@@ -91,17 +91,21 @@ class BlogsController < ApplicationController
     end
 
     def destroyLike
-        @like = Like.find_by("blog_id=?",params[:blog_id])
-        @notice = Notify.find_by("notifyable_id=?",@like.id)
-        if @notice
-            @notice = Notify.find_by("notifyable_id=?",@like.id)
-            @notice.destroy
-        
-            @like.destroy
-        else
-            @like.destroy
+        @likes = Like.where("blog_id=?",params[:blog_id])
+        @likes.each do |like|
+            if like.user_id == current_user.id
+                @notice = Notify.find_by("notifyable_id=?",like.id)
+                if @notice
+                    @notice = Notify.find_by("notifyable_id=?",like.id)
+                    @notice.destroy
+                    flash[:danger] = "You dislike this post"
+                    like.destroy
+                else
+                    flash[:danger] = "You dislike this post"
+                    like.destroy
+                end
+            end
         end
-        flash[:danger] = "You dislike this post"
         redirect_to showBlog_path(params[:blog_id])
     end
 

@@ -10,6 +10,7 @@ gem 'sqlite3', '~> 1.3.6'
 gem 'devise'
 gem 'pry'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

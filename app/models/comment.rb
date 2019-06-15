@@ -13,6 +13,5 @@ class Comment < ApplicationRecord
 
   def self.mycount(id)
     Comment.where("blog_id=?",id).count
-
   end
 end

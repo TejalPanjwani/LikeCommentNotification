@@ -41,8 +41,9 @@
 Comment </button>
 
 <% if @blog.check_user_like_or_not(current_user.id,@blog.id) %>
-  <%= link_to "like", blog_destroyLike_path(@blog.id),  :class=>"btn btn-success" ,method: :delete %> 
+  <%= link_to "Unlike", blog_destroyLike_path(@blog.id),  :class=>"btn btn-success" ,method: :delete %> 
 <% else %>
+<%# binding.pry %>
  <%= link_to "Like", blog_addLike_path(@blog.id),:class=>"btn btn-default", method: :post %> 
 <% end %>
 

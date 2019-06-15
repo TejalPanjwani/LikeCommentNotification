@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   get 'new' => 'home#new'
-  devise_for :users, controllers: { registrations: 'registrations' }
+  post 'import_file' => 'home#import_file'
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
   
   resources :blogs do 
